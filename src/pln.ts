@@ -17,7 +17,7 @@ export async function pln(lyrics: any) {
 	const pythonShell = new PythonShell("main.py", {
 		mode: "json",
 		scriptPath:
-			"/home/hoffman/Documents/code/GitHub/Suricator/backend/src/scripts",
+			"/scripts",
 		args: [lyrics],
 	});
 
