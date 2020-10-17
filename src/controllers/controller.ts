@@ -4,19 +4,20 @@ import { pln } from "../pln";
 
 export default {
 	async lyrics(request: Request, response: Response) {
-		let lyrics = "";
 		let { search_string } = request.query;
 
-		lyrics = await search(search_string as string);
+		let song = await search(search_string as string);
 
-		lyrics = lyrics.replace(/[(?<=\[)](.*?)[(?=\])]/g, "");
+		song.lyrics = song.lyrics.replace(/[(?<=\[)](.*?)[(?=\])]/g, "");
 
-        let count
-        count = await pln(lyrics);
-        
+        const count = await pln(song.lyrics);
+        console.log(song)
+
 		return response.json({
-			lyrics: lyrics,
-			sentence_count: +count,
+			song,
+			pln: {
+				sentence_count: +count,
+			},
 		});
 	},
 };
