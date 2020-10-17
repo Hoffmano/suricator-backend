@@ -1,4 +1,5 @@
 import { PythonShell } from "python-shell";
+import path from "path"
 
 export async function pln(lyrics: any) {
 	lyrics = lyrics.replace(/[(?<=\[)](.*?)[(?=\])]/g, " ");
@@ -17,7 +18,7 @@ export async function pln(lyrics: any) {
 	const pythonShell = new PythonShell("main.py", {
 		mode: "json",
 		scriptPath:
-			"/scripts",
+			path.join(__dirname,"scripts"),
 		args: [lyrics],
 	});
 
