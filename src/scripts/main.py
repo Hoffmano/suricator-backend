@@ -1,4 +1,6 @@
 import sys
+import os
+os.system("pipenv shell")
 import nltk
 import nltk.tokenize.punkt
 import json
