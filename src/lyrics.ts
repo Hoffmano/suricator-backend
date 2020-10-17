@@ -1,8 +1,8 @@
 import Lyricist from "lyricist";
 
-const lyricist = new Lyricist(
-	"RDH4LAPsVqv2BIl2SMge1vx3smzx0p6IZSHBeJZWXv7EO5wMOcP0ont0LiaJ3osO"
-);
+require("dotenv").config();
+
+const lyricist = new Lyricist(process.env.GENIUS as string);
 
 export async function search(s:string) {
     const hits = await lyricist.search(s);
