@@ -7,19 +7,16 @@ export default {
 		let lyrics = "";
 		let { search_string } = request.query;
 
-		// const search_string = request.query
-		// console.log(search_string);
 		lyrics = await search(search_string as string);
 
 		lyrics = lyrics.replace(/[(?<=\[)](.*?)[(?=\])]/g, "");
 
-        let count:any = 0
+        let count
         count = await pln(lyrics);
         
-		console.log(lyrics);
 		return response.json({
 			lyrics: lyrics,
-			sentence_count: count,
+			sentence_count: +count,
 		});
 	},
 };

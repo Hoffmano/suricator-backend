@@ -26,8 +26,8 @@ export async function pln(lyrics: any) {
 			resolve(message);
 		});
 	});
-    let result = [await promise];
-    console.log(result)
+    let result = await promise as number;
+    // console.log(result)
 	// await console.log(result);
 	return result;
 }
