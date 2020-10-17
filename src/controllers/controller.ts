@@ -13,11 +13,13 @@ export default {
 
 		lyrics = lyrics.replace(/[(?<=\[)](.*?)[(?=\])]/g, "");
 
-		let count: any = await pln(lyrics);
+        let count:any = 0
+        count = await pln(lyrics);
+        
 		console.log(lyrics);
 		return response.json({
 			lyrics: lyrics,
-			sentence_count: count.sentences,
+			sentence_count: count,
 		});
 	},
 };

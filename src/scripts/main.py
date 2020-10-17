@@ -1,7 +1,5 @@
 import sys
-import os
 import nltk
-nltk.download()
 import nltk.tokenize.punkt
 import json
 
@@ -15,6 +13,4 @@ def sentence_count(txt):
 if __name__ == "__main__":
     sentence_count = sentence_count(txt)
 
-    print(json.dumps({
-        "sentences": sentence_count
-    }))
+    print(sentence_count)

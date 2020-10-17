@@ -1,5 +1,5 @@
 import { PythonShell } from "python-shell";
-import path from "path"
+import path from "path";
 
 export async function pln(lyrics: any) {
 	lyrics = lyrics.replace(/[(?<=\[)](.*?)[(?=\])]/g, " ");
@@ -13,12 +13,11 @@ export async function pln(lyrics: any) {
 	lyrics = lyrics.replace(/\.{1,9}/g, ".");
 	lyrics = lyrics.replace(/\!\./g, "!");
 	lyrics = lyrics.replace(/\?\./g, "?");
-    lyrics = lyrics.trim();
-    
+	lyrics = lyrics.trim();
+
 	const pythonShell = new PythonShell("main.py", {
-		mode: "json",
-		scriptPath:
-			path.join(__dirname,"scripts"),
+		mode: "text",
+		scriptPath: path.join(__dirname, "scripts"),
 		args: [lyrics],
 	});
 
@@ -27,7 +26,8 @@ export async function pln(lyrics: any) {
 			resolve(message);
 		});
 	});
-
-	let result = await promise;
+    let result = [await promise];
+    console.log(result)
+	// await console.log(result);
 	return result;
 }
