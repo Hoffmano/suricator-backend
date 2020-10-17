@@ -2,9 +2,6 @@ import express from "express";
 import routes from "./routes";
 import "express-async-errors";
 
-import { search } from "./lyrics";
-import querystring from "querystring";
-import { pln } from "./pln";
 import cors from "cors"
 
 const app = express();
