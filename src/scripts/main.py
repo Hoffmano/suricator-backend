@@ -1,6 +1,7 @@
 import sys
 import os
 import nltk
+nltk.download()
 import nltk.tokenize.punkt
 import json
 
