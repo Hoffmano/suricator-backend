@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="100" height="80%" src="https://lh3.googleusercontent.com/Cu4tW4GHK6MzAxjj1vbAsWnnC5nYX4cN5YxbwPcdbFQ7GoAw0zKEPUWzTlAdHs0Iyg" alt="WhatsApp BOT"></a>
+  <img width="100" height="80%" src="https://www.flaticon.com/svg/static/icons/svg/427/427519.svg" alt="WhatsApp BOT"></a>
 </p>
 
 <h3 align="center">Suricator - RESTful API</h3>
