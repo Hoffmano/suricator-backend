@@ -12,7 +12,7 @@
 </div>
 
 ### 🗒️ Table of content
-- [✌ Apresentação](###presentação)
+- [✌ Apresentação](###-✌-Apresentação)
 - [▶ Instalação](###instação)
 - [🔰 Comandos](###comandos)
 
