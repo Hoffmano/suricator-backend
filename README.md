@@ -12,27 +12,27 @@
 </div>
 
 ### 🗒️ Table of content
-- [✌ Apresentação](#-apresentação)
-- [▶ Instalação](#-instalação)
-- [🔰 Comandos](#-comandos)
+- [🖖 Presentation](#-presentation)
+- [🔨 Installation](#-installation)
+- [🔰 Routes](#-routes)
 
 ---
 
-### ✌ Apresentação
+### 🖖 Presentation
 
-Este é o backend, do sistema Suricator, um sistema que tem o objetive de ensinar inglês através de músicas, tendo como principal feature a classificação de músicas em níveis através de PLN (processamento de linguagem natural).
-
----
-
-### ▶ Instalação:
-
-1. Instalar dependências: `yarn install` ou `npm install`;
-2. Iniciar aplicação: `yarn dev` ou `npm run dev`.
-
-Após configuração, basta acessar o seguinte endereço: [localhost:3333](http://localhost:3333)
+This is the backend, of the Suricator system, a system that aims to use English through songs, with the main feature of classifying songs in levels through PLN (natural language processing).
 
 ---
 
-### 🔰 Comandos
-Para realizar qualquer requisição a API basta acrescentar o seguinte endereço ao final da URL base:
-`/lyrics?search_string=sua pesquisa aqui`
+### 🔨 Installation
+
+1. Install dependencies: `yarn install` ou `npm install`;
+2. Launch application: `yarn dev` ou `npm run dev`.
+
+After configuration, just access the following address: [localhost:3333](http://localhost:3333)
+
+---
+
+### 🔰 Routes
+To make any request to the API just add the following address to the end of the base URL:
+`/lyrics?search_string=your search go here
