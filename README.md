@@ -12,9 +12,9 @@
 </div>
 
 ### 🗒️ Table of content
-[Apresentação](###presentação)
-[Instalação](###instação)
-[Comandos](###comandos)
+[✌ Apresentação](###presentação)
+[▶ Instalação](###instação)
+[🔰 Comandos](###comandos)
 
 ---
 
