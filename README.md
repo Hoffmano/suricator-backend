@@ -34,7 +34,5 @@ After configuration, just access the following address: [localhost:3333](http://
 ---
 
 ### 🔰 Routes
-To make any request to the API just add the following address to the end of the base URL:
-`/lyrics?search_string=your search go here`
-
-That will make a GET request to the API.
+That are the routes to use the API:
+- GET: `/lyrics?search_string=your search go here`
