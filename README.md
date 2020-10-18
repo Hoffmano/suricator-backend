@@ -10,10 +10,11 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>
-### Table of content
-[Apresentação](###Apresentação)
-[Instalação](###Instalação)
-[Comandos](###Comandos)
+
+### 🗒️ Table of content
+[Apresentação](### ✌ Apresentação)
+[Instalação](### ▶ Instação:)
+[Comandos](### 🔰 Comandos)
 
 ---
 
