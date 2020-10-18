@@ -12,9 +12,9 @@
 </div>
 
 ### 🗒️ Table of content
-- [✌ Apresentação](###-apresentação)
-- [▶ Instalação](###-instação)
-- [🔰 Comandos](###-comandos)
+- [✌ Apresentação](#-apresentação)
+- [▶ Instalação](#-instalação)
+- [🔰 Comandos](#-comandos)
 
 ---
 
@@ -24,7 +24,7 @@ Este é o backend, do sistema Suricator, um sistema que tem o objetive de ensina
 
 ---
 
-### ▶ Instação:
+### ▶ Instalação:
 
 1. Instalar dependências: `yarn install` ou `npm install`;
 2. Iniciar aplicação: `yarn dev` ou `npm run dev`.
