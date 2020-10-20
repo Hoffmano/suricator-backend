@@ -17,7 +17,7 @@ export async function pln(lyrics: any) {
 
 	const pythonShell = new PythonShell("main.py", {
 		mode: "text",
-		scriptPath: path.join(__dirname, "scripts"),
+		scriptPath: path.join(__dirname, "python_scripts"),
 		args: [lyrics],
 	});
 
@@ -25,9 +25,9 @@ export async function pln(lyrics: any) {
 		pythonShell.on("message", function (message) {
 			resolve(message);
 		});
-	});
-    let result = await promise as number;
-    // console.log(result)
-	// await console.log(result);
+    });
+    
+	let result = (await promise) as number;
+
 	return result;
 }
