@@ -1,23 +1,34 @@
 import { Request, Response } from "express";
-import { search } from "../lyrics";
-import { pln } from "../pln";
+import { setOriginalNode } from "typescript";
+import { search_lyrics } from "../models/lyrics";
+import { search_songs } from "../models/songs";
+import { pln } from "./pln";
+import views, { song_nlp } from "../views/view";
+import Lyricist from "lyricist";
 
 export default {
 	async lyrics(request: Request, response: Response) {
-		let { search_string } = request.query;
+		const { id } = request.query;
 
-		let song = await search(search_string as string);
+		const song: Lyricist.Song = await search_lyrics((id as unknown) as number);
 
 		song.lyrics = song.lyrics.replace(/[(?<=\[)](.*?)[(?=\])]/g, "");
 
-        const count = await pln(song.lyrics);
-        console.log(song)
+		const count = await pln(song.lyrics);
 
-		return response.json({
-			song,
-			pln: {
-				sentence_count: +count,
-			},
+		var song_nlp = <song_nlp>{};
+
+		Object.assign(song_nlp, song);
+		Object.assign(song_nlp, {
+			sentence_count: count,
 		});
+
+		return response.json(views.render_song(song_nlp));
+	},
+
+	async songs(request: Request, response: Response) {
+		const { search_string } = request.query;
+		const songs = await search_songs(search_string as string);
+		return response.json(views.render_many_songs(songs));
 	},
 };
