@@ -10,6 +10,7 @@ export default {
 			id: song.id,
 			title: song.title,
 			artist: song.primary_artist.name,
+            album_cover: song.header_image_thumbnail_url,
 		};
 	},
 
@@ -21,8 +22,11 @@ export default {
 		return {
 			title: song.title,
 			artist: song.primary_artist.name,
-			spotify: song.media.find((media) => media.provider == "spotify")?.url,
-			lyrics: song.lyrics,
+			spotify: song.media.find((media) => media.provider == "spotify")
+				?.url,
+            lyrics: song.lyrics,
+            sentence_count: song.sentence_count,
+            album_cover: song.header_image_thumbnail_url,
 		};
 	},
 };

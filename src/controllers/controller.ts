@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { setOriginalNode } from "typescript";
-import { search } from "../models/lyrics";
+import { search_lyrics } from "../models/lyrics";
 import { search_songs } from "../models/songs";
 import { pln } from "./pln";
 import views, { song_nlp } from "../views/view";
@@ -10,7 +10,7 @@ export default {
 	async lyrics(request: Request, response: Response) {
 		const { id } = request.query;
 
-		const song: Lyricist.Song = await search((id as unknown) as number);
+		const song: Lyricist.Song = await search_lyrics((id as unknown) as number);
 
 		song.lyrics = song.lyrics.replace(/[(?<=\[)](.*?)[(?=\])]/g, "");
 

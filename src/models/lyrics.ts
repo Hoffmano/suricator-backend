@@ -5,7 +5,7 @@ dotenv.config();
 
 const lyricist = new Lyricist(process.env.GENIUS as string);
 
-export async function search(id: number) {
+export async function search_lyrics(id: number) {
 	let song:Lyricist.Song = await lyricist.song(id, { fetchLyrics: true });
     
     while (song.lyrics == "") {
