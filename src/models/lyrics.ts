@@ -14,3 +14,8 @@ export async function search_lyrics(id: number) {
     
     return song;
 }
+
+export async function search_song(id: number) {
+	let song: Lyricist.Song = await lyricist.song(id);
+	return song;
+}
