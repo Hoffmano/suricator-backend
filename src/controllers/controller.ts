@@ -25,6 +25,10 @@ export default {
 					return response.json(views.render_song(song));
 				} else {
 					const song = await search_lyrics((id as unknown) as number);
+					lyrics_database.create({
+						id: id,
+						lyrics: song.lyrics,
+					});
 					return response.json(views.render_song(song));
 				}
 			}
