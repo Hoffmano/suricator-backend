@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"scripts": {
 		"dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
-		"start": "ts-node src/server.ts && pip3 install nltk"
+		"start": "ts-node src/server.ts"
 	},
 	"dependencies": {
 		"@types/cheerio": "^0.22.22",
@@ -15,6 +15,7 @@
 		"@types/node-fetch": "^2.5.7",
 		"@types/request": "^2.48.5",
 		"@types/request-promise": "^4.1.46",
+		"axios": "^0.21.0",
 		"cheerio": "^1.0.0-rc.3",
 		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",

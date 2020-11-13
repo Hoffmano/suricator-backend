@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export default mongoose.connect(
-	"mongodb+srv://admin:admin@cluster0.1gr99.mongodb.net/database?retryWrites=true&w=majority",
+	process.env.MONGODB_URI as string,
 	{
 		useNewUrlParser: true,
 		useFindAndModify: true,
