@@ -1,4 +1,7 @@
-import mongoose, { Schema, Document } from "mongoose";
+import { Schema, Document } from "mongoose";
+
+// import mongoose, { Schema, Document } from "mongoose";
+const mongoose = require("mongoose") 
 
 export interface lyrics_interface extends Document {
 	id: number;
