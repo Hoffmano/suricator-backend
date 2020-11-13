@@ -9,7 +9,7 @@ export default {
 
 		lyrics_collection.findOne(
 			{ id: id },
-			async (error, document: lyrics_interface) => {
+			async (error:any, document: lyrics_interface) => {
 				if (error) return console.error(error);
 				if (document) {
 					let song = await search_song((id as unknown) as number, document.lyrics);
