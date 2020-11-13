@@ -39,6 +39,6 @@
 		"url": "^0.11.0"
 	},
 	"devDependencies": {
-		"@types/mongoose": "^5.7.37"
+		"@types/mongoose": "^5.10.0"
 	}
 }
