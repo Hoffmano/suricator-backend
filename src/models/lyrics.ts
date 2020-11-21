@@ -9,14 +9,13 @@ const lyricist = new Lyricist(process.env.GENIUS as string);
 
 export async function search_song(id: number, lyrics: any) {
   let song: any = await lyricist.song(id);
+  
   console.log(lyrics);
-  console.log();
-  console.log();
 
-  // lyrics = lyrics.replace(/([.*])|((.*))/i, "");
+  lyrics = lyrics.replace(/(\[.*\])|(\(.*\))/g, "");
 
-  // console.log(lyrics)
-
+  console.log(lyrics);
+  
   await nlp_api
     .post("/", {
       id: id,
@@ -44,6 +43,8 @@ export async function search_song_lyrics(id: number) {
       console.log(error);
     });
   }
+
+  song.lyrics = song.lyrics.replace(/(\[.*\])|(\(.*\))/g, "");
 
   await nlp_api
     .post("/", {
