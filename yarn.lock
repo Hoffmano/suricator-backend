@@ -1646,7 +1646,7 @@ loud-rejection@^1.0.0:
 
 lyricist@^2.2.2:
   version "2.2.2"
-  resolved "https://registry.yarnpkg.com/lyricist/-/lyricist-2.2.2.tgz"
+  resolved "https://registry.yarnpkg.com/lyricist/-/lyricist-2.2.2.tgz#2fd632247d2eb45d515a9a29dfd9ff54cbb03a57"
   integrity sha1-L9YyJH0utF1RWpop39n/VMuwOlc=
   dependencies:
     cheerio "^0.22.0"

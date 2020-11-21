@@ -6,7 +6,9 @@ dotenv.config();
 const lyricist = new Lyricist(process.env.GENIUS as string);
 
 export async function search_songs(search_string: string) {
-	const songs = await lyricist.search(search_string);
+  const songs = await lyricist.search(search_string).catch((error) => {
+    console.log(error);
+  });
 
-	return songs;
+  return songs as any[];
 }
