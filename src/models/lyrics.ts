@@ -9,6 +9,13 @@ const lyricist = new Lyricist(process.env.GENIUS as string);
 
 export async function search_song(id: number, lyrics: any) {
   let song: any = await lyricist.song(id);
+  console.log(lyrics);
+  console.log();
+  console.log();
+
+  // lyrics = lyrics.replace(/([.*])|((.*))/i, "");
+
+  // console.log(lyrics)
 
   await nlp_api
     .post("/", {
