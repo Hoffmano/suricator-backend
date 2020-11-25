@@ -37,6 +37,7 @@ export default {
   },
   renderSongByDifficulty(song: any) {
     return {
+      id:song.id,
       title: song.title,
       artist: song.artist,
       album_cover: song.album_cover,
