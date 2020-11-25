@@ -32,4 +32,14 @@ export default {
       difficulty: song.difficulty,
     };
   },
+  renderSongsByDifficulty(songs: any[]) {
+    return songs.map((song) => this.renderSongByDifficulty(song));
+  },
+  renderSongByDifficulty(song: any) {
+    return {
+      title: song.title,
+      artist: song.artist,
+      album_cover: song.album_cover,
+    };
+  }
 };
