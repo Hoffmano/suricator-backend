@@ -15,7 +15,6 @@ database.once("open", () => {
 	console.log("Connected with MongoDB");
 });
 
-database.on("error", (error) => {
+database.on("error", (error:any) => {
 	console.error(error);
 });
-
