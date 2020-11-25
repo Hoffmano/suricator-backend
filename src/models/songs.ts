@@ -22,7 +22,7 @@ export async function songsByDifficulty(difficulty: any) {
         console.error(error);
       }
     }
-  ).sort({views:-1});
+  ).sort({views:-1}).limit(10);
 
   return songs
 }
