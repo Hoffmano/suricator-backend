@@ -7,7 +7,7 @@ import lyrics_collection, {
 import lyrics_model from "../database/schemas/lyrics_model";
 import { database } from "../database/connection";
 
-const databaseVersion = 2;
+const databaseVersion = 3;
 
 export default {
   async get_lyrics(request: Request, response: Response) {
@@ -85,6 +85,7 @@ export default {
             artist: song.primary_artist.name,
             lyrics: song.lyrics,
             album_cover: song.header_image_thumbnail_url,
+            title: song.title,
           })
           .catch((error: any) => {
             console.log(error);
