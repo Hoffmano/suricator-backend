@@ -63,6 +63,26 @@ export default {
           },
         });
 
+        if (document.views) {
+          lyrics_collection
+            .updateOne(document, {
+              $inc: { views: 1 },
+            })
+            .then(() => {
+              document.save();
+            });
+        } else {
+          lyrics_collection
+            .updateOne(document, {
+              $set: {
+                views: 1,
+              },
+            })
+            .then(() => {
+              document.save();
+            });
+        }
+
         await document.save();
 
         return response.json(views.render_song(song));
@@ -86,6 +106,7 @@ export default {
             lyrics: song.lyrics,
             album_cover: song.header_image_thumbnail_url,
             title: song.title,
+            views: 1,
           })
           .catch((error: any) => {
             console.log(error);
