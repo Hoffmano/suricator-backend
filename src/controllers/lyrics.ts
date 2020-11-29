@@ -1,13 +1,9 @@
 import { Request, Response } from "express";
 import { search_song_lyrics, search_song } from "../models/lyrics";
 import views from "../views/render";
-import lyrics_collection, {
-  lyrics_interface,
-} from "../database/schemas/lyrics_model";
-import lyrics_model from "../database/schemas/lyrics_model";
-import { database } from "../database/connection";
+import lyrics_collection from "../database/schemas/lyrics_model";
 
-const databaseVersion = 3;
+const databaseVersion = 7;
 
 export default {
   async get_lyrics(request: Request, response: Response) {
@@ -38,7 +34,31 @@ export default {
               });
           }
 
-          return response.json(views.render_song_database(document));
+          if (document.difficulty == "" || undefined) {
+            const song = await search_song_lyrics(
+              (id as unknown) as number
+            ).catch((error) => {
+              console.log(error);
+            });
+
+            song.lyrics = await song.lyrics.replace(/(\[.*\])|(\(.*\))/g, "");
+
+            await lyrics_collection.updateOne(document, {
+              $set: {
+                version: databaseVersion,
+                difficulty: song.difficulty,
+                lyrics: song.lyrics,
+                title: song.title,
+                artist: song.primary_artist.name,
+                album_cover: song.header_image_thumbnail_url,
+              },
+            });
+
+            await document.save();
+            return response.json(views.render_song_database(document));
+          } else {
+            return response.json(views.render_song_database(document));
+          }
         }
 
         let song = await search_song(
