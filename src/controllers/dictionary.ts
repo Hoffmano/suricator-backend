@@ -1,9 +1,12 @@
 import { Request, Response } from "express";
-import puppeteer from "puppeteer";
+const puppeteer = require("puppeteer")
 
 export default {
   async translate(request: Request, response: Response) {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--no-sandbox"],
+    });
     const page = await browser.newPage();
     await page.goto(
       `https://www.google.com/search?q=traducao+${request.params.word}`
@@ -14,7 +17,7 @@ export default {
     } catch (e) {}
 
     let element = await page.$("#tw-target-text > span");
-    let result: string = await page.evaluate((el) => el.textContent, element);
+    let result: string = await page.evaluate((el:any) => el.textContent, element);
 
     browser.close();
 
