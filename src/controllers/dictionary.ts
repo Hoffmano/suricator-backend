@@ -4,10 +4,8 @@ import puppeteer from "puppeteer";
 export default {
   async translate(request: Request, response: Response) {
     const browser = await puppeteer.launch({
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox"
-      ],
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     const page = await browser.newPage();
     await page.goto(
