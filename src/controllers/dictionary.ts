@@ -17,7 +17,7 @@ export default {
     } catch (e) {}
 
     let element = await page.$("#tw-target-text > span");
-    let result: string = await page.evaluate((el) => el.textContent, element);
+    let result: string = await page.evaluate((el:any) => el.textContent, element);
 
     browser.close();
 
