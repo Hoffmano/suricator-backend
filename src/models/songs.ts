@@ -17,7 +17,7 @@ export async function search_songs(search_string: string) {
 export async function songsByDifficulty(difficulty: any) {
   const songs = await lyrics_collection.find(
     { difficulty: difficulty },
-    (error, documents) => {
+    (error:any, documents:any) => {
       if (error) {
         console.error(error);
       }
