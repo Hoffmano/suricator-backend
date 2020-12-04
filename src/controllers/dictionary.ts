@@ -5,7 +5,8 @@ export default {
   async translate(request: Request, response: Response) {
     const browser = await puppeteer.launch({
       args: [
-        "--no-sandbox"
+        "--no-sandbox",
+        "--disable-setuid-sandbox"
       ],
     });
     const page = await browser.newPage();

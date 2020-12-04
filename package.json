@@ -10,9 +10,11 @@
   "dependencies": {
     "@types/cheerio": "^0.22.22",
     "@types/cors": "^2.8.8",
+    "@types/express": "^4.17.9",
     "@types/lyricist": "^2.2.0",
     "@types/mongoose": "^5.10.0",
     "@types/node-fetch": "^2.5.7",
+    "@types/puppeteer": "^5.4.1",
     "@types/request": "^2.48.5",
     "@types/request-promise": "^4.1.46",
     "axios": "^0.21.0",
@@ -38,8 +40,6 @@
     "ts-node": "^9.1.0",
     "ts-node-dev": "^1.0.0-pre.65",
     "typescript": "^4.1.2",
-    "url": "^0.11.0",
-    "@types/express": "^4.17.9",
-    "@types/puppeteer": "^5.4.0"
+    "url": "^0.11.0"
   }
 }
