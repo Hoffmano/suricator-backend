@@ -2,140 +2,165 @@ import { Request, Response } from "express";
 import { search_song_lyrics, search_song } from "../models/lyrics";
 import views from "../views/render";
 import lyrics_collection from "../database/schemas/lyrics_model";
+import { textSpanContainsPosition } from "typescript";
 
 const databaseVersion = 7;
 
 export default {
-  async get_lyrics(request: Request, response: Response) {
-    const { id } = request.query;
+	async test(request: Request, response: Response) {
+		const { id } = request.query;
 
-    lyrics_collection.findOne({ id: id }, async (error: any, document: any) => {
-      if (error) return console.error(error);
+		const song = await search_song_lyrics((id as unknown) as number).catch(
+			(error) => {
+				console.log(error);
+			},
+		);
 
-      if (document) {
-        if (document.version == databaseVersion) {
-          if (document.views) {
-            lyrics_collection
-              .updateOne(document, {
-                $inc: { views: 1 },
-              })
-              .then(() => {
-                document.save();
-              });
-          } else {
-            lyrics_collection
-              .updateOne(document, {
-                $set: {
-                  views: 1,
-                },
-              })
-              .then(() => {
-                document.save();
-              });
-          }
+		song.lyrics = song.lyrics.replace(/(\[.*\])|(\(.*\))/g, "");
 
-          if (document.difficulty == "" || undefined) {
-            const song = await search_song_lyrics(
-              (id as unknown) as number
-            ).catch((error) => {
-              console.log(error);
-            });
+		return response.json(views.render_song(song));
+	},
+	async get_lyrics(request: Request, response: Response) {
+		const { id } = request.query;
 
-            song.lyrics = await song.lyrics.replace(/(\[.*\])|(\(.*\))/g, "");
+		lyrics_collection.findOne(
+			{ id: id },
+			async (error: any, document: any) => {
+				if (error) return console.error(error);
 
-            await lyrics_collection.updateOne(document, {
-              $set: {
-                version: databaseVersion,
-                difficulty: song.difficulty,
-                lyrics: song.lyrics,
-                title: song.title,
-                artist: song.primary_artist.name,
-                album_cover: song.header_image_thumbnail_url,
-              },
-            });
+				if (document) {
+					if (document.version == databaseVersion) {
+						if (document.views) {
+							lyrics_collection
+								.updateOne(document, {
+									$inc: { views: 1 },
+								})
+								.then(() => {
+									document.save();
+								});
+						} else {
+							lyrics_collection
+								.updateOne(document, {
+									$set: {
+										views: 1,
+									},
+								})
+								.then(() => {
+									document.save();
+								});
+						}
 
-            await document.save();
-            return response.json(views.render_song_database(document));
-          } else {
-            return response.json(views.render_song_database(document));
-          }
-        }
+						if (document.difficulty == "" || undefined) {
+							const song = await search_song_lyrics(
+								(id as unknown) as number,
+							).catch((error) => {
+								console.log(error);
+							});
 
-        let song = await search_song(
-          (id as unknown) as number,
-          document.lyrics
-        ).catch((error) => {
-          console.log(error);
-        });
+							song.lyrics = await song.lyrics.replace(
+								/(\[.*\])|(\(.*\))/g,
+								"",
+							);
 
-        song = { ...song, lyrics: document.lyrics };
+							await lyrics_collection.updateOne(document, {
+								$set: {
+									version: databaseVersion,
+									difficulty: song.difficulty,
+									lyrics: song.lyrics,
+									title: song.title,
+									artist: song.primary_artist.name,
+									album_cover:
+										song.header_image_thumbnail_url,
+								},
+							});
 
-        song.lyrics = song.lyrics.replace(/(\[.*\])|(\(.*\))/g, "");
+							await document.save();
+							return response.json(
+								views.render_song_database(document),
+							);
+						} else {
+							return response.json(
+								views.render_song_database(document),
+							);
+						}
+					}
 
-        await lyrics_collection.updateOne(document, {
-          $set: {
-            version: databaseVersion,
-            difficulty: song.difficulty,
-            lyrics: song.lyrics,
-            title: song.title,
-            artist: song.primary_artist.name,
-            album_cover: song.header_image_thumbnail_url,
-          },
-        });
+					let song = await search_song(
+						(id as unknown) as number,
+						document.lyrics,
+					).catch((error) => {
+						console.log(error);
+					});
 
-        if (document.views) {
-          lyrics_collection
-            .updateOne(document, {
-              $inc: { views: 1 },
-            })
-            .then(() => {
-              document.save();
-            });
-        } else {
-          lyrics_collection
-            .updateOne(document, {
-              $set: {
-                views: 1,
-              },
-            })
-            .then(() => {
-              document.save();
-            });
-        }
+					song = { ...song, lyrics: document.lyrics };
 
-        await document.save();
+					song.lyrics = song.lyrics.replace(/(\[.*\])|(\(.*\))/g, "");
 
-        return response.json(views.render_song(song));
-      } else {
-        console.log("não achou no banco de dados");
+					await lyrics_collection.updateOne(document, {
+						$set: {
+							version: databaseVersion,
+							difficulty: song.difficulty,
+							lyrics: song.lyrics,
+							title: song.title,
+							artist: song.primary_artist.name,
+							album_cover: song.header_image_thumbnail_url,
+						},
+					});
 
-        const song = await search_song_lyrics((id as unknown) as number).catch(
-          (error) => {
-            console.log(error);
-          }
-        );
+					if (document.views) {
+						lyrics_collection
+							.updateOne(document, {
+								$inc: { views: 1 },
+							})
+							.then(() => {
+								document.save();
+							});
+					} else {
+						lyrics_collection
+							.updateOne(document, {
+								$set: {
+									views: 1,
+								},
+							})
+							.then(() => {
+								document.save();
+							});
+					}
 
-        song.lyrics = song.lyrics.replace(/(\[.*\])|(\(.*\))/g, "");
+					await document.save();
 
-        lyrics_collection
-          .create({
-            id: song.id,
-            version: databaseVersion,
-            difficulty: song.difficulty,
-            artist: song.primary_artist.name,
-            lyrics: song.lyrics,
-            album_cover: song.header_image_thumbnail_url,
-            title: song.title,
-            views: 1,
-          })
-          .catch((error: any) => {
-            console.log(error);
-          });
+					return response.json(views.render_song(song));
+				} else {
+					console.log("não achou no banco de dados");
 
-        console.log(song);
+					const song = await search_song_lyrics(
+						(id as unknown) as number,
+					).catch((error) => {
+						console.log(error);
+					});
 
-        return response.json(views.render_song(song));
-      }
-    });
-  },
+					song.lyrics = song.lyrics.replace(/(\[.*\])|(\(.*\))/g, "");
+
+					lyrics_collection
+						.create({
+							id: song.id,
+							version: databaseVersion,
+							difficulty: song.difficulty,
+							artist: song.primary_artist.name,
+							lyrics: song.lyrics,
+							album_cover: song.header_image_thumbnail_url,
+							title: song.title,
+							views: 1,
+						})
+						.catch((error: any) => {
+							console.log(error);
+						});
+
+					console.log(song);
+
+					return response.json(views.render_song(song));
+				}
+			},
+		);
+	},
 };
