@@ -8,7 +8,7 @@ const databaseVersion = 7;
 
 export default {
 	async test(request: Request, response: Response) {
-		const { id } = request.query;
+		const { id } = request.params;
 
 		const song = await search_song_lyrics((id as unknown) as number).catch(
 			(error) => {
@@ -21,7 +21,7 @@ export default {
 		return response.json(views.render_song(song));
 	},
 	async get_lyrics(request: Request, response: Response) {
-		const { id } = request.query;
+		const { id } = request.params;
 
 		lyrics_collection.findOne(
 			{ id: id },
