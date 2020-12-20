@@ -1,1 +1,1 @@
-declare module "mongoose";
+declare module 'mongoose'
