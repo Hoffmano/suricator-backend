@@ -1,5 +1,7 @@
+import { Song } from '../@types/song'
+
 export default {
-	render_songs(song: any) {
+	renderSong(song: Song) {
 		return {
 			id: song.id,
 			title: song.title,
@@ -8,11 +10,13 @@ export default {
 		}
 	},
 
-	render_many_songs(songs: any[]) {
-		return songs.map((song) => this.render_songs(song))
+	renderManySongs(songs: Song[]) {
+		if (typeof songs === 'object') {
+			return songs.map((song: Song) => this.renderSong(song))
+		}
 	},
 
-	render_song(song: any) {
+	renderLyrics(song: Song) {
 		return {
 			title: song.title,
 			artist: song.primary_artist.name,
@@ -23,7 +27,8 @@ export default {
 			difficulty: song.difficulty,
 		}
 	},
-	render_song_database(song: any) {
+
+	renderSongDatabase(song: Song) {
 		return {
 			title: song.title,
 			artist: song.artist,
@@ -32,10 +37,12 @@ export default {
 			difficulty: song.difficulty,
 		}
 	},
-	renderSongsByDifficulty(songs: any[]) {
+
+	renderSongsByDifficulty(songs: Song[]) {
 		return songs.map((song) => this.renderSongByDifficulty(song))
 	},
-	renderSongByDifficulty(song: any) {
+
+	renderSongByDifficulty(song: Song) {
 		return {
 			id: song.id,
 			title: song.title,

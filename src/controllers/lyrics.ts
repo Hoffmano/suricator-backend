@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { search_song_lyrics, search_song } from "../models/lyrics";
 import views from "../views/render";
 import lyrics_collection from "../database/schemas/lyrics_model";
-import { textSpanContainsPosition } from "typescript";
 
 const databaseVersion = 7;
 
@@ -18,9 +17,9 @@ export default {
 
 		song.lyrics = song.lyrics.replace(/(\[.*\])|(\(.*\))/g, "");
 
-		return response.json(views.render_song(song));
+		return response.json(views.renderLyrics(song));
 	},
-	async get_lyrics(request: Request, response: Response) {
+	async getLyrics(request: Request, response: Response) {
 		const { id } = request.params;
 
 		lyrics_collection.findOne(
@@ -76,11 +75,11 @@ export default {
 
 							await document.save();
 							return response.json(
-								views.render_song_database(document),
+								views.renderSongDatabase(document),
 							);
 						} else {
 							return response.json(
-								views.render_song_database(document),
+								views.renderSongDatabase(document),
 							);
 						}
 					}
@@ -129,7 +128,7 @@ export default {
 
 					await document.save();
 
-					return response.json(views.render_song(song));
+					return response.json(views.renderLyrics(song));
 				} else {
 					console.log("não achou no banco de dados");
 
@@ -158,7 +157,7 @@ export default {
 
 					console.log(song);
 
-					return response.json(views.render_song(song));
+					return response.json(views.renderLyrics(song));
 				}
 			},
 		);

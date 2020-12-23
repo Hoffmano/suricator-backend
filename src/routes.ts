@@ -5,8 +5,8 @@ import dictionary from './controllers/dictionary'
 
 const routes = Router()
 
-routes.get('/songs/:search_string', songs.search_songs)
-routes.get('/lyrics/:id', lyrics.get_lyrics)
+routes.get('/songs/:searchString', songs.searchSongs)
+routes.get('/lyrics/:id', lyrics.getLyrics)
 routes.get('/songs-by-difficulty/:difficulty', songs.songsByDifficulty)
 routes.get('/translate/:word', dictionary.translate)
 
