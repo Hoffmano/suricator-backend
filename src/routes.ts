@@ -1,16 +1,13 @@
-import { Router } from "express";
-import lyrics from "./controllers/lyrics";
-import songs from "./controllers/songs";
-import dictionary from "./controllers/dictionary"
+import { Router } from 'express'
+import lyrics from './controllers/lyrics'
+import songs from './controllers/songs'
+import dictionary from './controllers/dictionary'
 
+const routes = Router()
 
-const routes = Router();
+routes.get('/songs/:searchString', songs.searchSongs)
+routes.get('/lyrics/:id', lyrics.getLyrics)
+routes.get('/songs-by-difficulty/:difficulty', songs.songsByDifficulty)
+routes.get('/translate/:word', dictionary.translate)
 
-routes.get("/songs", songs.search_songs);
-routes.get("/lyrics", lyrics.get_lyrics);
-routes.get("/songs-by-difficulty", songs.songsByDifficulty)
-routes.get("/translate/:word", dictionary.translate)
-routes.get("/test", lyrics.test)
-
-
-export default routes;
+export default routes
